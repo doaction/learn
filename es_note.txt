@@ -1,0 +1,44 @@
+curl -XPUT -H "Content-Type: application/json" "http://localhost:9200/megacorp/employee/1" -d '
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}'
+
+curl -XPUT -H "Content-Type: application/json" "http://localhost:9200/megacorp/employee/2" -d '
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}'
+
+curl -XPUT -H "Content-Type: application/json" "http://localhost:9200/megacorp/employee/3" -d '
+{
+    "first_name" :  "Douglas",
+    "last_name" :   "Fir",
+    "age" :         35,
+    "about":        "I like to build cabinets",
+    "interests":  [ "forestry" ]
+}'
+
+
+
+curl -XGET -H "Content-Type: application/json" "http://localhost:9200/megacorp/employee/1?pretty"
+
+
+curl -XGET -H "Content-Type: application/json" "http://localhost:9200/megacorp/employee/_search?pretty" -d '
+{
+  "aggs": {
+    "all_interests": {
+      "terms": { "field": "interests" }
+    }
+  }
+}'
+
+
+
+curl -XGET -H "Content-Type: application/json" "http://localhost:9200/_cluster/health?pretty"
