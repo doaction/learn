@@ -43,4 +43,4 @@ curl -XGET -H "Content-Type: application/json" "http://localhost:9200/megacorp/e
 
 curl -XGET -H "Content-Type: application/json" "http://localhost:9200/_cluster/health?pretty"
 
-test
+testtest
