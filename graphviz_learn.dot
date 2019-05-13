@@ -1,0 +1,120 @@
+//digraph html {
+//abc [shape=none, margin=0, label=<
+//	<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+//    	<TR><TD ROWSPAN="3"><FONT COLOR="red">hello</FONT><BR/>world</TD>
+//       		<TD COLSPAN="3">b</TD>
+//        	<TD ROWSPAN="3" BGCOLOR="lightgrey">g</TD>
+//    		<TD ROWSPAN="3">h</TD>
+//    	</TR>
+//		<TR>
+//		    <TD>s</TD>
+//			<TD>s</TD>
+//			<TD>s</TD>
+//		</TR>
+//		<TR>
+//			<TD COLSPAN="3">s</TD>
+//		</TR>
+//	</TABLE>>];
+//}
+
+//digraph structs {
+// node [shape=record];
+//     struct1 [shape=record,label="<f0> left|<f1> mid\ dle|<f2> right"];
+//     struct2 [shape=record,label="<f0> one|<f1> two"];
+//     struct3 [shape=record,label="hello\nworld |{ b |{c|<here> d|e}| f}| {g|s|s|s} | h"];
+//     struct1 -> struct2;
+//     struct1 -> struct3;
+//}
+
+digraph dis {
+rankdir=LR;
+ranksep=0.3;
+    {
+        node [shape=plaintext, fontsize=16];
+        源 -> 切割 -> pass1 -> pass2 -> 合并
+    }
+
+	src [shape=plaintext, label="视频\n源文件", color=lightblue, style=filled];
+
+	101101 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">101101</TD></TR>
+			<TR><TD>切割<br/></TD></TR>
+		</TABLE>>];
+
+    102101 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">102101</TD></TR>
+			<TR><TD>x264<br/>pass1</TD></TR>
+		</TABLE>>];
+
+	102101 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">102101</TD></TR>
+			<TR><TD>x264<br/>pass1</TD></TR>
+		</TABLE>>];
+	
+	102102 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">102102</TD></TR>
+			<TR><TD>x265<br/>pass1</TD></TR>
+		</TABLE>>];
+
+	102103 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">102103</TD></TR>
+			<TR><TD>t264<br/>pass1</TD></TR>
+		</TABLE>>];
+
+	103101 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">103101</TD></TR>
+			<TR><TD>快速<br/>pass2</TD></TR>
+		</TABLE>>];
+	
+	103102 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">103102</TD></TR>
+			<TR><TD>x264<br/>pass2</TD></TR>
+		</TABLE>>];
+
+	103103 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">103103</TD></TR>
+			<TR><TD>x265<br/>pass2</TD></TR>
+		</TABLE>>];
+
+	103104 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">103104</TD></TR>
+			<TR><TD>t265<br/>pass2</TD></TR>
+		</TABLE>>];
+
+	104101 [shape=none, margin=0, label=<
+		<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+			<TR><TD BGCOLOR="lightgrey">104101</TD></TR>
+			<TR><TD>分片合并<br/>和存储</TD></TR>
+		</TABLE>>];
+
+	{rank=same; "src"}
+	{rank=same; "101101"}
+	{rank=same; "102101"; "102102"; "102103";}
+	{rank=same; "103101"; "103102"; "103103"; "103104"}
+	{rank=same; "104101"}
+
+	src->101101;
+	src->103101;
+
+	101101->102101;
+	
+	102101->102102;
+	102101->102103;
+	102101->103102;
+	102102->103103;
+	102103->103104;
+
+	103101->104101;
+	103102->104101;
+	103103->104101;
+	103104->104101 [arrowhead="none"];
+}

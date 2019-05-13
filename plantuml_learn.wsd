@@ -1,0 +1,40 @@
+@startuml
+
+title test PlantUML
+actor Bob as bob  << (B,#ADD1B2) >> #yellow
+actor Alice as alice << (A,#ADD1B2) >> #blue
+box "appendix" #LightBlue
+participant "Famous Bob" as fbob << (F,#ADD1B2) >>
+end box
+
+autonumber
+
+activate bob
+bob -> alice : Hello, how --are-- you
+note left: send hello
+activate alice #FFBBBB
+alice --> bob : **Fine**, thank __you__, and you?
+note right: response
+deactivate alice
+|||
+bob -> alice : I am fine, too
+deactivate bob
+
+alice -> fbob: yes
+activate fbob
+destroy fbob
+
+... //Some long delay// ...
+
+bob -> bob : check
+note over bob, alice
+    check
+    check
+    check
+end note
+
+== 分隔符1 ==
+
+...
+
+@enduml
