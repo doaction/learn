@@ -27,6 +27,8 @@ git remote add <shortname> <url>
 //查看分支，一般加上-vv
 git branch -vv
 //查看远程分支
+git branch -r
+//在远程存储库中列出引用
 git ls-remote
 //查看分支图(下面有更完善的例子，见alias)
 git log --oneline --decorate --graph --all
